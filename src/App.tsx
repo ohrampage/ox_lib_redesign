@@ -1,15 +1,20 @@
-import { isEnvBroswer } from './utils'
+import { Dev } from "./modules/dev";
+import { AlertDialog } from "./modules/dialog/AlertDialog";
+import { isEnvBroswer } from "./utils";
 
 function App() {
   return (
-    <div className={`w-full h-screen grid place-items-center ${isEnvBroswer() ? 'bg-[url(https://i.imgur.com/3pzRj9n.png)]' : ''}`}
-    // style={{ 
-    //   backgroundImage: isEnvBroswer() ? `url(https://i.imgur.com/3pzRj9n.png)` : 'none',
-    // }}
+    <div
+      className={`w-full h-screen grid place-items-center ${
+        isEnvBroswer()
+          ? "bg-[url(https://i.imgur.com/3pzRj9n.png)] bg-cover bg-no-repeat bg-center"
+          : ""
+      }`}
     >
-      <h2 className='scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0'>Hello, fivem!</h2>
+      <AlertDialog />
+      {isEnvBroswer() && <Dev />}
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
