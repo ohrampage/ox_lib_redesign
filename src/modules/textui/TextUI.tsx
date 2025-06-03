@@ -61,18 +61,18 @@ export const TextUI = () => {
   return (
     <Wrapper variants={{ visible, position: data.position }}>
       <div
-        className="flex gap-2 text-base py-3 px-4 m-4 bg-gray-50/90 text-gray-900/90 rounded-sm relative"
+        className="flex gap-2 text-base py-3 px-4 m-4 bg-gray-950/80 text-gray-50/90 rounded-sm relative"
         style={data.style ? data.style : {}}
       >
         <div className="flex items-center gap-3">
           {data.interactKey && (
             <>
-              <div className="grid place-items-center text-sm leading-[21px] w-5 h-5 rounded-xs bg-gray-900 text-gray-50">
+              <div className="grid place-items-center text-sm leading-[21px] w-5 h-5 rounded-xs bg-gray-50 text-gray-950">
                 <span className="text-sm leading-1 text-center align-middle font-medium">
                   {data.interactKey}
                 </span>
               </div>
-              <Separator orientation="vertical" />
+              <Separator orientation="vertical" className="bg-gray-400" />
             </>
           )}
         </div>
