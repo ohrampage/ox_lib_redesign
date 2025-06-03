@@ -5,6 +5,7 @@ import { debugAlert } from "./debug/alert";
 import { debugTextUI } from "./debug/textui";
 import { debugCirclularProgress, debugProgress } from "./debug/progress";
 import { useState } from "react";
+import { debugSkillCheck } from "./debug/skillcheck";
 
 const debugItems = [
   {
@@ -45,7 +46,7 @@ const debugItems = [
   },
   {
     label: "Run Skill Check",
-    onClick: () => console.log("running skill check"),
+    onClick: () => debugSkillCheck(),
   },
 ];
 
