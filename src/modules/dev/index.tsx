@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Settings } from "lucide-react";
 import { debugAlert } from "./debug/alert";
+import { debugTextUI } from "./debug/textui";
 
 export const Dev = () => {
   return (
@@ -39,7 +40,7 @@ export const Dev = () => {
         >
           Activate progress circle
         </Button>
-        <Button size="lg" onClick={() => console.log("showing text UI")}>
+        <Button size="lg" onClick={() => debugTextUI()}>
           Show Text UI
         </Button>
         <Button size="lg" onClick={() => console.log("running skill check")}>
