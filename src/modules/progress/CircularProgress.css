@@ -1,0 +1,8 @@
+@keyframes circularLoad {
+  0% {
+    stroke-dashoffset: var(--circumference);
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}

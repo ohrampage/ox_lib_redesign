@@ -3,7 +3,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Settings } from "lucide-react";
 import { debugAlert } from "./debug/alert";
 import { debugTextUI } from "./debug/textui";
-import { debugProgress } from "./debug/progress";
+import { debugCirclularProgress, debugProgress } from "./debug/progress";
 
 export const Dev = () => {
   return (
@@ -35,10 +35,7 @@ export const Dev = () => {
         <Button size="lg" onClick={() => debugProgress()}>
           Activate progress bar
         </Button>
-        <Button
-          size="lg"
-          onClick={() => console.log("activated progress circle")}
-        >
+        <Button size="lg" onClick={() => debugCirclularProgress()}>
           Activate progress circle
         </Button>
         <Button size="lg" onClick={() => debugTextUI()}>
