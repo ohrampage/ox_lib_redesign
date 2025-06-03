@@ -4,46 +4,85 @@ import { Settings } from "lucide-react";
 import { debugAlert } from "./debug/alert";
 import { debugTextUI } from "./debug/textui";
 import { debugCirclularProgress, debugProgress } from "./debug/progress";
+import { useState } from "react";
+
+const debugItems = [
+  {
+    label: "Open input dialog",
+    onClick: () => console.log("opened input dialog"),
+  },
+  {
+    label: "Open alert dialog",
+    onClick: () => debugAlert(),
+  },
+  {
+    label: "Open context menu",
+    onClick: () => console.log("opened context menu"),
+  },
+  {
+    label: "Open list menu",
+    onClick: () => console.log("opened list menu"),
+  },
+  {
+    label: "Open radial menu",
+    onClick: () => console.log("opened radial menu"),
+  },
+  {
+    label: "Send notification",
+    onClick: () => console.log("sent notification"),
+  },
+  {
+    label: "Activate progress bar",
+    onClick: () => debugProgress(),
+  },
+  {
+    label: "Activate progress circle",
+    onClick: () => debugCirclularProgress(),
+  },
+  {
+    label: "Show Text UI",
+    onClick: () => debugTextUI(),
+  },
+  {
+    label: "Run Skill Check",
+    onClick: () => console.log("running skill check"),
+  },
+];
+
+interface DebugButtonProps {
+  label: string;
+  onClick: () => void;
+}
+
+const DebugButton = (props: DebugButtonProps) => (
+  <Button size="lg" onClick={props.onClick}>
+    {props.label}
+  </Button>
+);
 
 export const Dev = () => {
+  const [open, setOpen] = useState(false);
+
+  const handleClose = () => setOpen(false);
+
   return (
-    <Sheet>
+    <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
         <Button size="icon" className="absolute bottom-5 right-5">
           <Settings />
         </Button>
       </SheetTrigger>
       <SheetContent className="p-5 pt-12 flex flex-col gap-5">
-        <Button size="lg" onClick={() => console.log("opened input dialog")}>
-          Open input dialog
-        </Button>
-        <Button size="lg" onClick={() => debugAlert()}>
-          Open alert dialog
-        </Button>
-        <Button size="lg" onClick={() => console.log("opened context menu")}>
-          Open context menu
-        </Button>
-        <Button size="lg" onClick={() => console.log("opened list menu")}>
-          Open list menu
-        </Button>
-        <Button size="lg" onClick={() => console.log("opened radial menu")}>
-          Open radial menu
-        </Button>
-        <Button size="lg" onClick={() => console.log("sent notification")}>
-          Send notification
-        </Button>
-        <Button size="lg" onClick={() => debugProgress()}>
-          Activate progress bar
-        </Button>
-        <Button size="lg" onClick={() => debugCirclularProgress()}>
-          Activate progress circle
-        </Button>
-        <Button size="lg" onClick={() => debugTextUI()}>
-          Show Text UI
-        </Button>
-        <Button size="lg" onClick={() => console.log("running skill check")}>
-          Run Skill Check
-        </Button>
+        {debugItems.map((item, index) => (
+          <DebugButton
+            key={index}
+            label={item.label}
+            onClick={() => {
+              item.onClick();
+              handleClose();
+            }}
+          />
+        ))}
       </SheetContent>
     </Sheet>
   );
