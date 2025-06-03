@@ -30,14 +30,14 @@ export const Progress = () => {
   if (!visible) return null;
 
   return (
-    <div className="flex flex-col absolute bottom-[20vh] left-1/2 transform -translate-x-1/2 bg-neutral-900/40 backdrop-blur-xs p-2 rounded-md">
+    <div className="flex flex-col absolute bottom-[20vh] left-1/2 transform -translate-x-1/2 bg-neutral-900/60 backdrop-blur-[2px] p-2 rounded-md">
       {data.label && (
         <div className="flex gap-1 items-center mb-2 text-white text-sm justify-center">
           {data.icon && <span className={`${data.icon} text-sm`}></span>}
           <p className="font-medium">{data.label}</p>
         </div>
       )}
-      <div className="w-[400px] max-w-[85vw] h-4 rounded-xs bg-neutral-900/40  overflow-hidden">
+      <div className="w-[400px] max-w-[85vw] h-3 rounded-xs bg-neutral-50/40  overflow-hidden">
         <div
           style={{
             animation: `load ${data.duration}ms linear`,
