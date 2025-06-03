@@ -1,5 +1,6 @@
 import { Dev } from "./modules/dev";
 import { AlertDialog } from "./modules/dialog/AlertDialog";
+import { Progress } from "./modules/progress/Progress";
 import { TextUI } from "./modules/textui/TextUI";
 import { isEnvBroswer } from "./utils";
 
@@ -14,6 +15,7 @@ function App() {
     >
       <AlertDialog />
       <TextUI />
+      <Progress />
       {isEnvBroswer() && <Dev />}
     </div>
   );
