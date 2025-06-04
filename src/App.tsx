@@ -1,5 +1,6 @@
 import { Dev } from "./modules/dev";
 import { AlertDialog } from "./modules/dialog/AlertDialog";
+import { Notifications } from "./modules/notifications";
 import { CircularProgress } from "./modules/progress/CircularProgress";
 import { Progress } from "./modules/progress/Progress";
 import { SkillCheck } from "./modules/skillcheck";
@@ -20,6 +21,7 @@ function App() {
       <Progress />
       <CircularProgress />
       <SkillCheck />
+      <Notifications />
       {isEnvBroswer() && <Dev />}
     </div>
   );

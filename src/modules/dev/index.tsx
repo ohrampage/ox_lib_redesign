@@ -6,6 +6,7 @@ import { debugTextUI } from "./debug/textui";
 import { debugCirclularProgress, debugProgress } from "./debug/progress";
 import { useState } from "react";
 import { debugSkillCheck } from "./debug/skillcheck";
+import { debugNotification } from "./debug/notifications";
 
 const debugItems = [
   {
@@ -30,7 +31,7 @@ const debugItems = [
   },
   {
     label: "Send notification",
-    onClick: () => console.log("sent notification"),
+    onClick: () => debugNotification(),
   },
   {
     label: "Activate progress bar",
