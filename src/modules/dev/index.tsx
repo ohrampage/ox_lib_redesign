@@ -7,11 +7,12 @@ import { debugCirclularProgress, debugProgress } from "./debug/progress";
 import { useState } from "react";
 import { debugSkillCheck } from "./debug/skillcheck";
 import { debugNotification } from "./debug/notifications";
+import { debugInputDialog } from "./debug/input";
 
 const debugItems = [
   {
     label: "Open input dialog",
-    onClick: () => console.log("opened input dialog"),
+    onClick: () => debugInputDialog(),
   },
   {
     label: "Open alert dialog",
