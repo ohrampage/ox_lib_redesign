@@ -1,5 +1,5 @@
 import type React from "react";
-import type { IconProp } from "./icon";
+import type { IconProp, LibIconProps } from "./icon";
 import type { ToasterProps } from "sonner";
 
 export interface NotificationProps {
@@ -8,7 +8,7 @@ export interface NotificationProps {
   title?: string;
   duration?: number;
   showDuration?: boolean;
-  icon?: IconProp;
+  icon?: LibIconProps["icon"];
   iconColor?: string;
   // iconAnimation?: IconAnimation;
   position?: ToasterProps["position"] | "top" | "bottom";

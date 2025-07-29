@@ -8,6 +8,7 @@ import { useState } from "react";
 import { debugSkillCheck } from "./debug/skillcheck";
 import { debugNotification } from "./debug/notifications";
 import { debugInputDialog } from "./debug/input";
+import { debugMenu } from "./debug/menu";
 
 const debugItems = [
   {
@@ -22,10 +23,10 @@ const debugItems = [
     label: "Open context menu",
     onClick: () => console.log("opened context menu"),
   },
-  {
-    label: "Open list menu",
-    onClick: () => console.log("opened list menu"),
-  },
+  // {
+  //   label: "Open list menu",
+  //   onClick: () => debugMenu(),
+  // },
   {
     label: "Open radial menu",
     onClick: () => console.log("opened radial menu"),

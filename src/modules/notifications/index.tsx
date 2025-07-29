@@ -2,6 +2,7 @@ import { toast, Toaster } from "sonner";
 import { AlertCircle, CheckCircle, Info, XCircle } from "lucide-react";
 import { useNuiEvent } from "@/hooks/useNuiEvent";
 import type { NotificationProps } from "@/types/notifications";
+import { LibIcon } from "@/components/icon/LibIcon";
 
 export const Notifications = () => {
   useNuiEvent<NotificationProps>("notify", (data) => {
@@ -39,15 +40,14 @@ export const Notifications = () => {
               : "self-start flex-shrink-0 mt-0.5"
           }`}
         >
-          <span
-            className={`${
-              icon ? icon : iconType
-            } text-${color}-400 self-center text-lg`}
+          <LibIcon
+            icon={icon ? icon : iconType}
+            className={`text-${color}-400 self-center text-lg`}
           />
         </div>
         <div className="flex-1">
           {title && (
-            <div className={`font-medium text-${color}-400`}>{title}</div>
+            <div className={`text-${color}-400 font-medium`}>{title}</div>
           )}
           {description && (
             <div className={`text-${color}-200 text-xs`}>{description}</div>
