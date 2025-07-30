@@ -27,7 +27,7 @@ function App() {
       <Notifications />
       <InputDialog />
       <RadialMenuController />
-      {/* <ListMenu /> */}
+      <ListMenu />
       {isEnvBroswer() && <Dev />}
     </div>
   );

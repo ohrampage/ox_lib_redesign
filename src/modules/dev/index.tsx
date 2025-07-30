@@ -9,6 +9,7 @@ import { debugSkillCheck } from "./debug/skillcheck";
 import { debugNotification } from "./debug/notifications";
 import { debugInputDialog } from "./debug/input";
 import { debugRadial } from "./debug/radial";
+import { debugMenu } from "./debug/menu";
 
 const debugItems = [
   {
@@ -23,10 +24,10 @@ const debugItems = [
     label: "Open context menu",
     onClick: () => console.log("opened context menu"),
   },
-  // {
-  //   label: "Open list menu",
-  //   onClick: () => debugMenu(),
-  // },
+  {
+    label: "Open list menu",
+    onClick: () => debugMenu(),
+  },
   {
     label: "Open radial menu",
     onClick: () => debugRadial(),

@@ -18,11 +18,7 @@ export const debugMenu = () => {
           },
           {
             label: "Vehicle class",
-            values: [
-              "pogchamp",
-              "nice champ",
-              { label: "POGGERS", description: "CHAMPPERS" },
-            ],
+            values: ["pogchamp", "nice champ", { label: "POGGERS", description: "CHAMPPERS" }],
             icon: "tag",
             description: "Side scroll general description",
           },

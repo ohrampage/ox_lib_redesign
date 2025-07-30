@@ -3,6 +3,8 @@
 @plugin "@iconify/tailwind4";
 @import "@radix-ui/colors/slate.css";
 @import "@radix-ui/colors/slate-dark.css";
+@import "@radix-ui/colors/black-alpha.css";
+@import "@radix-ui/colors/white-alpha.css";
 
 @custom-variant dark (&:is(.dark *));
 
