@@ -2,6 +2,7 @@ import { Dev } from "./modules/dev";
 import { AlertDialog } from "./modules/dialog/AlertDialog";
 import { InputDialog } from "./modules/dialog/InputDialog";
 import { ListMenu } from "./modules/menu/list";
+import { RadialMenuController } from "./modules/menu/radial/Controller";
 import { Notifications } from "./modules/notifications";
 import { CircularProgress } from "./modules/progress/CircularProgress";
 import { Progress } from "./modules/progress/Progress";
@@ -25,6 +26,7 @@ function App() {
       <SkillCheck />
       <Notifications />
       <InputDialog />
+      <RadialMenuController />
       {/* <ListMenu /> */}
       {isEnvBroswer() && <Dev />}
     </div>

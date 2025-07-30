@@ -8,7 +8,7 @@ import { useState } from "react";
 import { debugSkillCheck } from "./debug/skillcheck";
 import { debugNotification } from "./debug/notifications";
 import { debugInputDialog } from "./debug/input";
-import { debugMenu } from "./debug/menu";
+import { debugRadial } from "./debug/radial";
 
 const debugItems = [
   {
@@ -29,7 +29,7 @@ const debugItems = [
   // },
   {
     label: "Open radial menu",
-    onClick: () => console.log("opened radial menu"),
+    onClick: () => debugRadial(),
   },
   {
     label: "Send notification",

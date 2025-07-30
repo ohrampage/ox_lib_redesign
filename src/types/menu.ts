@@ -29,3 +29,13 @@ export interface MenuSettings {
   items: Array<MenuItem>;
   startItemIndex?: number;
 }
+
+export interface RadialMenuItem {
+  icon: string;
+  label: string;
+  isMore?: boolean;
+  menu?: string;
+  iconWidth?: number;
+  iconHeight?: number;
+  // keepOpen?: boolean;
+}
