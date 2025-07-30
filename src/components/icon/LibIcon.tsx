@@ -4,7 +4,7 @@ import { Icon } from "@iconify/react";
 import { styled } from "@stitches/react";
 
 const StyledIcon = styled(Icon, {
-  color: "var(--slate-11)",
+  color: "var(--white-a11)",
 });
 
 export const LibIcon = ({ icon, className }: LibIconProps) => {

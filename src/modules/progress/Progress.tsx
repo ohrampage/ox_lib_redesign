@@ -38,7 +38,7 @@ export const Progress = () => {
           <p className="font-medium">{data.label}</p>
         </div>
       )}
-      <div className="w-[400px] max-w-[85vw] h-9 p-[2px] rounded-xs ring-2 ring-neutral-50/40 overflow-hidden">
+      <div className="w-[400px] max-w-[85vw] h-8 p-[2px] rounded-xs ring-2 ring-neutral-50/40 overflow-hidden">
         <div
           style={{
             animation: `load ${data.duration}ms linear`,
