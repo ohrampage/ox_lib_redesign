@@ -2,6 +2,7 @@ import { useNuiEvent } from "@/hooks/useNuiEvent";
 import type { ProgressProps } from "@/types/progress";
 import { useEffect, useState } from "react";
 import "./Progress.css";
+import { LibIcon } from "@/components/icon/LibIcon";
 
 export const Progress = () => {
   const [data, setData] = useState<ProgressProps>({
@@ -30,20 +31,20 @@ export const Progress = () => {
   if (!visible) return null;
 
   return (
-    <div className="flex flex-col absolute bottom-[20vh] left-1/2 transform -translate-x-1/2 bg-neutral-900/60 backdrop-blur-[2px] p-2 rounded-md">
+    <div className="flex flex-col absolute bottom-[20vh] left-1/2 transform -translate-x-1/2 bg-neutral-950/50 backdrop-blur-[2px] p-2 rounded-sm">
       {data.label && (
-        <div className="flex gap-1 items-center mb-2 text-white text-sm justify-center">
-          {data.icon && <span className={`${data.icon} text-sm`}></span>}
+        <div className="flex gap-1 items-center mb-2 text-white justify-center">
+          {data.icon && <LibIcon icon={data.icon} />}
           <p className="font-medium">{data.label}</p>
         </div>
       )}
-      <div className="w-[400px] max-w-[85vw] h-3 rounded-xs bg-neutral-50/40  overflow-hidden">
+      <div className="w-[400px] max-w-[85vw] h-9 p-[2px] rounded-xs ring-2 ring-neutral-50/40 overflow-hidden">
         <div
           style={{
             animation: `load ${data.duration}ms linear`,
             willChange: "width",
           }}
-          className={`h-full bg-white`}
+          className={`h-full bg-linear-to-r from-gray-300 to-white rounded-xs`}
         ></div>
       </div>
     </div>

@@ -8,7 +8,7 @@ export const debugProgress = () => {
       data: {
         label: "Rolling dice...",
         duration: 8000,
-        icon: "icon-[ion--dice]",
+        icon: "ion:dice",
       },
     },
   ]);

@@ -5,7 +5,7 @@ export interface ProgressProps {
   duration: number;
 
   // *new* / not part of original lib
-  icon?: IconProp;
+  icon?: string;
 }
 
 export interface CirclularProgressProps {
