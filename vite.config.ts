@@ -9,6 +9,7 @@ export default defineConfig({
   base: "./",
   build: {
     outDir: "build",
+    sourcemap: true,
   },
   resolve: {
     alias: {
