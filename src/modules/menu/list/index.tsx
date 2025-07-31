@@ -11,7 +11,8 @@ import { Flex } from "@/components/ui/flex";
 import { Tooltip, TooltipContent } from "@/components/ui/tooltip";
 
 const MenuContainer = styled("div", {
-  backgroundColor: "var(--slate-1)",
+  backgroundColor: "var(--black-a11)",
+  backdropFilter: "blur(6px)",
   position: "absolute",
   pointerEvents: "none",
   width: 384,
@@ -28,7 +29,7 @@ const MenuContentWrapper = styled("div", {
 });
 
 const ScrollArrowContainer = styled(Flex, {
-  backgroundColor: "var(--slate-2)",
+  backgroundColor: "var(--white-a2)",
   textAlign: "center",
   // borderBottomLeftRadius: 8,
   // borderBottomRightRadius: 8,
@@ -219,8 +220,8 @@ export const ListMenu: React.FC = () => {
               align="center"
               css={{
                 padding: "12px",
-                backgroundColor: "var(--slate-2)",
-                borderBottom: "1px solid var(--slate-4)",
+                backgroundColor: "var(--white-a2)",
+                borderBottom: "1px solid var(--white-a2)",
               }}
             >
               <Heading>{menu.title}</Heading>

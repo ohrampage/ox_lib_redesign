@@ -15,13 +15,13 @@ interface Props {
 }
 
 const ButtonContainer = styled("div", {
-  backgroundColor: "var(--slate-2)",
+  backgroundColor: "var(--white-a1)",
   borderRadius: 4,
   padding: "2px",
   height: "60px",
   scrollMargin: "8px",
   "&:focus": {
-    backgroundColor: "var(--slate-3)",
+    backgroundColor: "var(--white-a3)",
     outline: "none",
   },
 });
@@ -68,7 +68,7 @@ const StyledProgress = styled(Progress, {
   overflow: "clip",
   backgroundClip: "padding-box",
   borderRadius: "4px",
-  backgroundColor: "var(--slate-4)",
+  backgroundColor: "var(--white-a3)",
 
   /* Fix overflow clipping in Safari */
   /* https://gist.github.com/domske/b66047671c780a238b51c51ffde8d3a0 */
@@ -76,7 +76,7 @@ const StyledProgress = styled(Progress, {
 });
 
 const StyledProgressIndicator = styled(ProgressIndicator, {
-  backgroundColor: "var(--slate-11)",
+  backgroundColor: "var(--white-a11)",
   width: "100%",
   height: "100%",
   transition: "transform 660ms cubic-bezier(0.65, 0, 0.35, 1)",
