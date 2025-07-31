@@ -128,7 +128,7 @@ export const ListMenu: React.FC = () => {
   }, [indexStates]);
 
   useEffect(() => {
-    if (!menu.items[selected]) return;
+    if (!menu.items[selected] || !listRefs.current) return;
     listRefs.current[selected]?.scrollIntoView({
       block: "nearest",
       inline: "start",

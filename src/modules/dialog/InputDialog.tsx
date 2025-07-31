@@ -670,7 +670,7 @@ const TimeField = ({ row, control, index }: FormRowControlProps<ITimeInput>) => 
                   date={date}
                   setDate={setDate}
                   ref={hourRef}
-                  onRightFocus={() => minuteRef.current?.focus()}
+                  onRightFocus={() => (minuteRef.current ? minuteRef.current.focus() : undefined)}
                   disabled={row.disabled}
                   period={
                     row.format === "12" && date ? (date.getHours() >= 12 ? "PM" : "AM") : undefined
@@ -687,8 +687,8 @@ const TimeField = ({ row, control, index }: FormRowControlProps<ITimeInput>) => 
                   date={date}
                   setDate={setDate}
                   ref={minuteRef}
-                  onLeftFocus={() => hourRef.current?.focus()}
-                  onRightFocus={() => secondRef.current?.focus()}
+                  onLeftFocus={() => (hourRef.current ? hourRef.current.focus() : undefined)}
+                  onRightFocus={() => (secondRef.current ? secondRef.current.focus() : undefined)}
                   disabled={row.disabled}
                   period={
                     row.format === "12" && date ? (date.getHours() >= 12 ? "PM" : "AM") : undefined
@@ -705,8 +705,12 @@ const TimeField = ({ row, control, index }: FormRowControlProps<ITimeInput>) => 
                   date={date}
                   setDate={setDate}
                   ref={secondRef}
-                  onLeftFocus={() => minuteRef.current?.focus()}
-                  onRightFocus={row.format === "12" ? () => periodRef.current?.focus() : undefined}
+                  onLeftFocus={() => (minuteRef.current ? minuteRef.current.focus() : undefined)}
+                  onRightFocus={
+                    row.format === "12"
+                      ? () => (periodRef.current ? periodRef.current.focus() : undefined)
+                      : undefined
+                  }
                   disabled={row.disabled}
                 />
               </div>
@@ -721,7 +725,7 @@ const TimeField = ({ row, control, index }: FormRowControlProps<ITimeInput>) => 
                     date={date}
                     setDate={setDate}
                     ref={periodRef}
-                    onLeftFocus={() => secondRef.current?.focus()}
+                    onLeftFocus={() => (secondRef.current ? secondRef.current.focus() : undefined)}
                   />
                 </div>
               ) : (

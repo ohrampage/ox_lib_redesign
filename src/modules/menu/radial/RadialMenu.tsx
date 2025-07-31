@@ -267,7 +267,7 @@ export const RadialMenuNew = ({ menuItems, size = 200, option }: RadialMenuNewPr
         "--selectedAngle":
           state.selected !== null
             ? `${getSelectedAngle(state.selected)}deg`
-            : `${lastAngle.current}deg`,
+            : `${lastAngle.current || 0}deg`,
       }}
       transition={{
         type: "spring",
