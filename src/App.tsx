@@ -1,6 +1,7 @@
 import { Dev } from "./modules/dev";
 import { AlertDialog } from "./modules/dialog/AlertDialog";
 import { InputDialog } from "./modules/dialog/InputDialog";
+import { ContextMenu } from "./modules/menu/context";
 import { ListMenu } from "./modules/menu/list";
 import { RadialMenuController } from "./modules/menu/radial/Controller";
 import { Notifications } from "./modules/notifications";
@@ -28,6 +29,7 @@ function App() {
       <InputDialog />
       <RadialMenuController />
       <ListMenu />
+      <ContextMenu />
       {isEnvBroswer() && <Dev />}
     </div>
   );
