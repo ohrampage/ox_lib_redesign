@@ -9,7 +9,7 @@ export default defineConfig({
   base: "./",
   build: {
     outDir: "build",
-    sourcemap: true,
+    sourcemap: "inline",
   },
   resolve: {
     alias: {
