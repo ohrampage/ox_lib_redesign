@@ -1,3 +1,4 @@
+import { useNuiEvent } from "./hooks/useNuiEvent";
 import { Dev } from "./modules/dev";
 import { AlertDialog } from "./modules/dialog/AlertDialog";
 import { InputDialog } from "./modules/dialog/InputDialog";
@@ -9,7 +10,14 @@ import { CircularProgress } from "./modules/progress/CircularProgress";
 import { Progress } from "./modules/progress/Progress";
 import { SkillCheck } from "./modules/skillcheck";
 import { TextUI } from "./modules/textui/TextUI";
-import { isEnvBroswer } from "./utils";
+import { isEnvBroswer, setClipboard } from "./utils";
+import { fetchNui } from "./utils/fetchNui";
+
+useNuiEvent("setClipboard", (data: string) => {
+  setClipboard(data);
+});
+
+fetchNui("init");
 
 function App() {
   return (
