@@ -1,5 +1,5 @@
 import type React from "react";
-import type { IconProp, LibIconProps } from "./icon";
+import type { LibIconProps } from "./icon";
 import type { ToasterProps } from "sonner";
 
 export interface NotificationProps {

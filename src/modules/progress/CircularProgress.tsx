@@ -1,6 +1,6 @@
 import { useNuiEvent } from "@/hooks/useNuiEvent";
 import type { CirclularProgressProps } from "@/types/progress";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import "./CircularProgress.css";
 
 const size = 80;
@@ -92,18 +92,12 @@ export const CircularProgress = () => {
         </svg>
 
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <span className="text-lg text-center font-medium text-white w-16">
-            {percentage}%
-          </span>
+          <span className="text-lg text-center font-medium text-white w-16">{percentage}%</span>
         </div>
       </div>
       <div className="flex gap-1 items-center bg-neutral-900/40 backdrop-blur-xs">
-        {data.icon && (
-          <span className={`${data.icon} text-lg text-white`}></span>
-        )}
-        <span className="text-base text-center font-medium text-white">
-          {data.label}
-        </span>
+        {data.icon && <span className={`${data.icon} text-lg text-white`}></span>}
+        <span className="text-base text-center font-medium text-white">{data.label}</span>
       </div>
     </div>
   );

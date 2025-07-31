@@ -108,12 +108,7 @@ interface RadialMenuNewProps {
   option?: number;
 }
 
-export const RadialMenuNew = ({
-  menuItems,
-  size = 200,
-  subMenu = false,
-  option,
-}: RadialMenuNewProps) => {
+export const RadialMenuNew = ({ menuItems, size = 200, option }: RadialMenuNewProps) => {
   const [state, setState] = useState<{
     selected: number | null;
     currentPage: number;
@@ -121,9 +116,9 @@ export const RadialMenuNew = ({
     selected: null,
     currentPage: option ? Math.floor((option - 1) / MAX_ITEMS) : 0,
   });
-  const [properties, setProperties] = useState<
-    [number, number, number, number, number]
-  >([30, 62, 59, 120, 83.2]);
+  const [properties, setProperties] = useState<[number, number, number, number, number]>([
+    30, 62, 59, 120, 83.2,
+  ]);
 
   const innerEl = useRef<HTMLDivElement | null>(null);
   const lastAngle = useRef<number | null>(-1);
@@ -172,15 +167,13 @@ export const RadialMenuNew = ({
   }, [displayItems.length]);
 
   const getSelectedAngle = (selectedIndex: number) => {
-    const baseAngle =
-      (360 / displayItems.length) * selectedIndex - properties[3];
+    const baseAngle = (360 / displayItems.length) * selectedIndex - properties[3];
     const normalizedBaseAngle = normalizeAngle(baseAngle);
 
     if (lastAngle.current === null) return normalizedBaseAngle;
 
     const newAngle =
-      normalizedBaseAngle +
-      360 * Math.round((lastAngle.current - normalizedBaseAngle) / 360);
+      normalizedBaseAngle + 360 * Math.round((lastAngle.current - normalizedBaseAngle) / 360);
 
     lastAngle.current = newAngle;
     return newAngle;
@@ -247,9 +240,7 @@ export const RadialMenuNew = ({
     const getRingAngle = () => {
       if (state.selected === null) return lastAngle.current;
 
-      const newAngle = normalizeAngle(
-        (360 / displayItems.length) * state.selected - properties[3]
-      );
+      const newAngle = normalizeAngle((360 / displayItems.length) * state.selected - properties[3]);
       if (lastAngle.current === null) return newAngle;
       const oldAngle = normalizeAngle(lastAngle.current || 0);
 
@@ -304,11 +295,7 @@ export const RadialMenuNew = ({
         }}
         data-has-selected={state.selected !== null}
       />
-      <RadialMenu
-        aria-describedby="radial-menu"
-        role="menu"
-        css={{ width: size, height: size }}
-      >
+      <RadialMenu aria-describedby="radial-menu" role="menu" css={{ width: size, height: size }}>
         {displayItems.map((item, i) => (
           <StyledRadialMenuItem
             key={item.label}
@@ -381,9 +368,7 @@ export const RadialMenuNew = ({
           },
         }}
       >
-        {state.selected !== null && (
-          <Label>{displayItems[state.selected].label}</Label>
-        )}
+        {state.selected !== null && <Label>{displayItems[state.selected].label}</Label>}
       </Inner>
     </RadialMenuWrapper>
   );
@@ -402,7 +387,5 @@ const normalizeAngle = (angle: number): number => {
 const getAngleDifference = (angle1: number, angle2: number): number => {
   const clockwiseDiff = normalizeAngle(angle2 - angle1);
   const counterClockwiseDiff = 360 - clockwiseDiff;
-  return clockwiseDiff < counterClockwiseDiff
-    ? clockwiseDiff
-    : -counterClockwiseDiff;
+  return clockwiseDiff < counterClockwiseDiff ? clockwiseDiff : -counterClockwiseDiff;
 };

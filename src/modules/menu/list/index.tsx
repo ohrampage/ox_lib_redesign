@@ -4,7 +4,7 @@ import { useNuiEvent } from "../../../hooks/useNuiEvent";
 import { ListItem } from "./ListItem";
 import { FocusTrap } from "focus-trap-react";
 import { fetchNui } from "@/utils/fetchNui";
-import type { MenuPosition, MenuSettings } from "@/types";
+import type { MenuSettings } from "@/types";
 import { LibIcon } from "@/components/icon/LibIcon";
 import { styled } from "@stitches/react";
 import { Flex } from "@/components/ui/flex";
