@@ -1,16 +1,6 @@
 import React, { useId, useMemo, useRef, useState } from "react";
-import {
-  useFieldArray,
-  useForm,
-  type Control,
-  type UseFormRegisterReturn,
-} from "react-hook-form";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+import { useFieldArray, useForm, type Control, type UseFormRegisterReturn } from "react-hook-form";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { useNuiEvent } from "@/hooks/useNuiEvent";
 import { useLocales } from "@/providers/LocaleProvider";
@@ -36,11 +26,7 @@ import { Slider } from "@/components/ui/slider";
 import { FormField, FormItem } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
 import { format, parse } from "date-fns";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 import { HexColorPicker } from "react-colorful";
 import { Calendar } from "@/components/ui/calendar";
@@ -50,12 +36,7 @@ import type { Period } from "@/components/timepicker/time-picker-utils";
 import { NumberInput } from "@/components/ui/number-input";
 import { MultiSelect } from "@/components/ui/mutli-select";
 import { Select } from "@radix-ui/react-select";
-import {
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 // import InputField from "./components/input"
 // import CheckboxField from "./components/checkbox"
 // import SelectField from "./components/select"
@@ -109,9 +90,7 @@ export const InputDialog: React.FC = () => {
       fieldForm.insert(index, {
         value:
           row.type !== "checkbox"
-            ? row.type === "date" ||
-              row.type === "date-range" ||
-              row.type === "time"
+            ? row.type === "date" || row.type === "date-range" || row.type === "time"
               ? row.default === true
                 ? new Date().getTime()
                 : Array.isArray(row.default)
@@ -150,23 +129,20 @@ export const InputDialog: React.FC = () => {
     for (let i = 0; i < fields.rows.length; i++) {
       const row = fields.rows[i];
 
-      if (
-        (row.type === "date" || row.type === "date-range") &&
-        row.returnString
-      ) {
+      if ((row.type === "date" || row.type === "date-range") && row.returnString) {
         if (!data.test[i]) continue;
         data.test[i].value = formatDate(data.test[i].value, row.format);
       }
     }
-    Object.values(data.test).forEach((obj: { value: any }) =>
-      values.push(obj.value)
-    );
+    Object.values(data.test).forEach((obj: { value: any }) => values.push(obj.value));
     await new Promise((resolve) => setTimeout(resolve, 200));
     form.reset();
     fieldForm.remove();
     console.log("InputDialog submitted:", values);
     fetchNui("inputData", values);
   });
+
+  if (!visible) return null;
 
   return (
     <Dialog
@@ -189,9 +165,7 @@ export const InputDialog: React.FC = () => {
         }}
       >
         <DialogHeader>
-          <DialogTitle className="text-center text-lg">
-            {fields.heading}
-          </DialogTitle>
+          <DialogTitle className="text-center text-lg">{fields.heading}</DialogTitle>
         </DialogHeader>
 
         <form onSubmit={onSubmit} className="space-y-4">
@@ -210,39 +184,19 @@ export const InputDialog: React.FC = () => {
                     />
                   )}
                   {row.type === "checkbox" && (
-                    <CheckboxField
-                      control={form.control}
-                      row={row}
-                      index={index}
-                    />
+                    <CheckboxField control={form.control} row={row} index={index} />
                   )}
                   {(row.type === "select" || row.type === "multi-select") && (
-                    <SelectField
-                      row={row}
-                      index={index}
-                      control={form.control}
-                    />
+                    <SelectField row={row} index={index} control={form.control} />
                   )}
                   {row.type === "number" && (
-                    <NumberField
-                      control={form.control}
-                      row={row}
-                      index={index}
-                    />
+                    <NumberField control={form.control} row={row} index={index} />
                   )}
                   {row.type === "slider" && (
-                    <SliderField
-                      control={form.control}
-                      row={row}
-                      index={index}
-                    />
+                    <SliderField control={form.control} row={row} index={index} />
                   )}
                   {row.type === "color" && (
-                    <ColorField
-                      control={form.control}
-                      row={row}
-                      index={index}
-                    />
+                    <ColorField control={form.control} row={row} index={index} />
                   )}
                   {row.type === "time" && (
                     <TimeField control={form.control} row={row} index={index} />
@@ -306,9 +260,7 @@ const InputField = ({ register, row, index }: FormRowRegisterProps<IInput>) => {
           </Label>
         )}
 
-        {row.description && (
-          <p className="text-xs text-muted-foreground">{row.description}</p>
-        )}
+        {row.description && <p className="text-xs text-muted-foreground">{row.description}</p>}
       </div>
 
       <div className="relative">
@@ -351,11 +303,7 @@ const InputField = ({ register, row, index }: FormRowRegisterProps<IInput>) => {
   );
 };
 
-const CheckboxField = ({
-  row,
-  control,
-  index,
-}: FormRowControlProps<ICheckbox>) => {
+const CheckboxField = ({ row, control, index }: FormRowControlProps<ICheckbox>) => {
   const id = useId();
   return (
     <FormField
@@ -397,9 +345,7 @@ const SliderField = ({ row, index, control }: FormRowControlProps<ISlider>) => {
             }
             onBlur={() => field.onBlur()}
             // onChange={(value) => field.onChange(value[0])}
-            defaultValue={
-              row.default ? [row.default] : row.min ? [row.min] : [0]
-            }
+            defaultValue={row.default ? [row.default] : row.min ? [row.min] : [0]}
             onValueChange={(value) => field.onChange(value[0])}
             disabled={row.disabled}
           />
@@ -409,11 +355,7 @@ const SliderField = ({ row, index, control }: FormRowControlProps<ISlider>) => {
   );
 };
 
-const TextareaField = ({
-  register,
-  row,
-  index,
-}: FormRowRegisterProps<ITextarea>) => {
+const TextareaField = ({ register, row, index }: FormRowRegisterProps<ITextarea>) => {
   const getRows = () => {
     if (row.description) {
       if (row.max) {
@@ -447,11 +389,7 @@ const TextareaField = ({
   );
 };
 
-const DateField = ({
-  row,
-  control,
-  index,
-}: FormRowControlProps<IDateInput>) => {
+const DateField = ({ row, control, index }: FormRowControlProps<IDateInput>) => {
   const [open, setOpen] = useState(false);
   const dateFormat = row.format || "dd/MM/yyyy";
   const clearable = row.clearable ?? true;
@@ -464,11 +402,7 @@ const DateField = ({
     }
   };
 
-  const isDisabled = (
-    min: string | undefined,
-    max: string | undefined,
-    dateFormat: string
-  ) => {
+  const isDisabled = (min: string | undefined, max: string | undefined, dateFormat: string) => {
     return (date: Date): boolean => {
       if (min && date < parse(min, dateFormat, new Date())) return true;
       if (max && date > parse(max, dateFormat, new Date())) return true;
@@ -523,16 +457,10 @@ const DateField = ({
               <PopoverContent className="w-auto p-0" align="start">
                 <Calendar
                   mode="single"
-                  selected={
-                    typeof field.value === "string"
-                      ? parseDate(field.value)
-                      : field.value
-                  }
+                  selected={typeof field.value === "string" ? parseDate(field.value) : field.value}
                   onSelect={(date) => {
                     const currentDate =
-                      typeof field.value === "string"
-                        ? parseDate(field.value)
-                        : field.value;
+                      typeof field.value === "string" ? parseDate(field.value) : field.value;
                     if (
                       clearable &&
                       currentDate &&
@@ -542,9 +470,7 @@ const DateField = ({
                       field.onChange(null);
                     } else {
                       field.onChange(
-                        row.returnString && date
-                          ? format(date, dateFormat)
-                          : date || null
+                        row.returnString && date ? format(date, dateFormat) : date || null
                       );
                     }
                     setOpen(false);
@@ -657,11 +583,7 @@ const DateField = ({
   );
 };
 
-const ColorField = ({
-  row,
-  control,
-  index,
-}: FormRowControlProps<IColorInput>) => {
+const ColorField = ({ row, control, index }: FormRowControlProps<IColorInput>) => {
   const getBackgroundColor = (color: string | undefined) => {
     if (!color) return "#ff0000";
     return color.startsWith("#") ? color : `#${color}`;
@@ -717,11 +639,7 @@ const ColorField = ({
   );
 };
 
-const TimeField = ({
-  row,
-  control,
-  index,
-}: FormRowControlProps<ITimeInput>) => {
+const TimeField = ({ row, control, index }: FormRowControlProps<ITimeInput>) => {
   const [period, setPeriod] = React.useState<Period>("PM");
   const minuteRef = useRef<HTMLInputElement>(null);
   const hourRef = useRef<HTMLInputElement>(null);
@@ -744,10 +662,7 @@ const TimeField = ({
             <Label className="text-xs">{row.label}</Label>
             <div className="flex items-end gap-2">
               <div className="grid gap-1 text-center">
-                <Label
-                  htmlFor="hours"
-                  className="text-xs text-muted-foreground"
-                >
+                <Label htmlFor="hours" className="text-xs text-muted-foreground">
                   Hours
                 </Label>
                 <TimePickerInput
@@ -758,19 +673,12 @@ const TimeField = ({
                   onRightFocus={() => minuteRef.current?.focus()}
                   disabled={row.disabled}
                   period={
-                    row.format === "12" && date
-                      ? date.getHours() >= 12
-                        ? "PM"
-                        : "AM"
-                      : undefined
+                    row.format === "12" && date ? (date.getHours() >= 12 ? "PM" : "AM") : undefined
                   }
                 />
               </div>
               <div className="grid gap-1 text-center">
-                <Label
-                  htmlFor="minutes"
-                  className="text-xs text-muted-foreground"
-                >
+                <Label htmlFor="minutes" className="text-xs text-muted-foreground">
                   Minutes
                 </Label>
                 <TimePickerInput
@@ -783,19 +691,12 @@ const TimeField = ({
                   onRightFocus={() => secondRef.current?.focus()}
                   disabled={row.disabled}
                   period={
-                    row.format === "12" && date
-                      ? date.getHours() >= 12
-                        ? "PM"
-                        : "AM"
-                      : undefined
+                    row.format === "12" && date ? (date.getHours() >= 12 ? "PM" : "AM") : undefined
                   }
                 />
               </div>
               <div className="grid gap-1 text-center">
-                <Label
-                  htmlFor="seconds"
-                  className="text-xs text-muted-foreground"
-                >
+                <Label htmlFor="seconds" className="text-xs text-muted-foreground">
                   Seconds
                 </Label>
                 <TimePickerInput
@@ -805,20 +706,13 @@ const TimeField = ({
                   setDate={setDate}
                   ref={secondRef}
                   onLeftFocus={() => minuteRef.current?.focus()}
-                  onRightFocus={
-                    row.format === "12"
-                      ? () => periodRef.current?.focus()
-                      : undefined
-                  }
+                  onRightFocus={row.format === "12" ? () => periodRef.current?.focus() : undefined}
                   disabled={row.disabled}
                 />
               </div>
               {row.format === "12" ? (
                 <div className="grid gap-1 text-center">
-                  <Label
-                    htmlFor="period"
-                    className="text-xs text-muted-foreground"
-                  >
+                  <Label htmlFor="period" className="text-xs text-muted-foreground">
                     Period
                   </Label>
                   <TimePeriodSelect
@@ -892,11 +786,7 @@ const SelectField = ({ row, control, index }: FormRowControlProps<ISelect>) => {
           ) : (
             <Select defaultValue={field.value} onValueChange={field.onChange}>
               <SelectTrigger>
-                <SelectValue
-                  placeholder={
-                    row.default || row.placeholder || "Select an option"
-                  }
-                />
+                <SelectValue placeholder={row.default || row.placeholder || "Select an option"} />
               </SelectTrigger>
               <SelectContent>
                 {row.options?.map((option) => (

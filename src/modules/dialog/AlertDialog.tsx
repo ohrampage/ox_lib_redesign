@@ -34,6 +34,8 @@ export const AlertDialog = () => {
     setDialogOpen(false);
   });
 
+  if (!dialogOpen) return null;
+
   return (
     <AlertDialogRoot open={dialogOpen}>
       <AlertDialogContent>
