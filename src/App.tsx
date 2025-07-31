@@ -13,13 +13,13 @@ import { TextUI } from "./modules/textui/TextUI";
 import { isEnvBroswer, setClipboard } from "./utils";
 import { fetchNui } from "./utils/fetchNui";
 
-useNuiEvent("setClipboard", (data: string) => {
-  setClipboard(data);
-});
-
-fetchNui("init");
-
 function App() {
+  useNuiEvent("setClipboard", (data: string) => {
+    setClipboard(data);
+  });
+
+  fetchNui("init");
+
   return (
     <div
       className={`w-full h-screen grid place-items-center ${
