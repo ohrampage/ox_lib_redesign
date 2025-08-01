@@ -12,11 +12,10 @@ import { Tooltip, TooltipContent } from "@/components/ui/tooltip";
 
 const MenuContainer = styled("div", {
   backgroundColor: "var(--black-a11)",
-  backdropFilter: "blur(6px)",
   position: "absolute",
   pointerEvents: "none",
   width: 384,
-  overflow: "clip",
+  overflow: "hidden",
   borderRadius: 8,
 });
 
@@ -24,8 +23,7 @@ const MenuContentWrapper = styled("div", {
   height: "fit-content",
   maxHeight: 415,
   overflow: "hidden",
-  borderTopLeftRadius: 0,
-  borderTopRightRadius: 0,
+  borderRadius: "inherit",
 });
 
 const ScrollArrowContainer = styled(Flex, {
@@ -234,7 +232,7 @@ export const ListMenu: React.FC = () => {
               onKeyDown={(e: React.KeyboardEvent<HTMLDivElement>) => moveMenu(e)}
             >
               <FocusTrap active={visible}>
-                <Flex direction="column" gap="2" css={{ padding: 8, overflowY: "scroll" }}>
+                <Flex direction="column" gap="2" css={{ padding: 8 }}>
                   {menu.items.map((item, index) => (
                     <React.Fragment key={`menu-item-${index}`}>
                       {item.label && (

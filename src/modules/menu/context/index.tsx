@@ -13,7 +13,6 @@ const openMenu = (id: string | undefined) => {
 
 const Container = styled("div", {
   backgroundColor: "var(--black-a11)",
-  backdropFilter: "blur(4px)",
   // color: "var(--white-a11)",
   borderRadius: 8,
   position: "absolute",
@@ -22,7 +21,7 @@ const Container = styled("div", {
   width: "320px",
   height: "max-content",
   // maxHeight: "580px",
-  // overflow: "hidden",
+  overflow: "hidden",
 });
 
 const Header = styled(Flex, {
@@ -47,7 +46,7 @@ const TitleText = styled("p", {
 const ButtonsContainer = styled("div", {
   // height: '560px',
   height: "100%",
-  overflowY: "scroll",
+  overflowY: "auto",
 });
 
 const ButtonsFlexWrapper = styled(Flex, {

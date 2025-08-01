@@ -31,7 +31,6 @@ const ButtonRoot = styled("button", {
       true: {
         color: "var(--white-a7)",
         "&:hover": {
-          // backgroundColor: "var(--slate-2)",
           cursor: "unset",
         },
         "&:active": {
@@ -106,8 +105,6 @@ const StyledProgress = styled(Progress, {
   borderRadius: "4px",
   backgroundColor: "var(--white-a3)",
 
-  /* Fix overflow clipping in Safari */
-  /* https://gist.github.com/domske/b66047671c780a238b51c51ffde8d3a0 */
   transform: "translateZ(0)",
 });
 
@@ -121,10 +118,8 @@ const StyledProgressIndicator = styled(ProgressIndicator, {
 const Image = styled("img", {
   width: "100%",
   height: "auto",
-  // borderRadius: "4px",
-  // marginBottom: "10px",
   objectFit: "cover",
-  aspectRatio: 1 / 1,
+  aspectRatio: "1 / 1",
   borderRadius: 2,
 });
 
@@ -133,71 +128,76 @@ const MetadataLabel = styled("span", {
   color: "var(--white-a9)",
 });
 
+const ButtonContent = ({
+  button,
+  buttonKey,
+  disabled,
+}: {
+  button: Option;
+  buttonKey: string;
+  disabled: boolean;
+}) => (
+  <Flex direction="row" justify="between">
+    <Flex direction="column" gap="1" align="start">
+      <Flex direction="row" gap="1">
+        {button?.icon && (
+          <Flex direction="column" justify="center" align="center" css={{ width: 25, height: 25 }}>
+            {typeof button.icon === "string" && isIconUrl(button.icon) ? (
+              <IconImage src={button.icon} alt="Missing img" />
+            ) : (
+              <LibIcon icon={button.icon} />
+            )}
+          </Flex>
+        )}
+        <Label disabled={disabled}>{button.title || buttonKey}</Label>
+      </Flex>
+      {button.description && <Description disabled={disabled}>{button.description}</Description>}
+      {button.progress !== undefined && (
+        <StyledProgress value={button.progress}>
+          <StyledProgressIndicator
+            style={{ transform: `translateX(-${100 - button.progress}%)` }}
+          />
+        </StyledProgress>
+      )}
+    </Flex>
+    {(button.menu || button.arrow) && button.arrow !== false && (
+      <Flex direction="column" justify="center" align="center" css={{ width: 25, height: 25 }}>
+        <LibIcon icon="chevron-right" />
+      </Flex>
+    )}
+  </Flex>
+);
+
 export const ContextButton: React.FC<{
   option: [string, Option];
 }> = ({ option }) => {
   const [buttonKey, button] = option;
+  const hasHoverContent = !button.disabled && (button.metadata || button.image);
+  const disabled = button.disabled || false;
+
+  const handleClick = () => {
+    if (!button.disabled && !button.readOnly) {
+      if (button.menu) {
+        openMenu(button.menu);
+      } else {
+        clickContext(buttonKey);
+      }
+    }
+  };
+
+  if (!hasHoverContent) {
+    return (
+      <ButtonRoot disabled={disabled} readOnly={button.readOnly} onClick={handleClick}>
+        <ButtonContent button={button} buttonKey={buttonKey} disabled={disabled} />
+      </ButtonRoot>
+    );
+  }
 
   return (
     <HoverCard openDelay={200}>
       <HoverCardTrigger asChild>
-        <ButtonRoot
-          disabled={button.disabled || !(button.metadata || button.image)}
-          readOnly={button.readOnly}
-          onClick={() => {
-            if (!button.disabled && !button.readOnly) {
-              if (button.menu) {
-                openMenu(button.menu);
-              } else {
-                clickContext(buttonKey);
-              }
-            }
-          }}
-        >
-          <Flex direction="row" justify="between">
-            <Flex direction="column" gap="1" align="start">
-              <Flex direction="row" gap="1">
-                {button?.icon && (
-                  <Flex
-                    direction="column"
-                    justify="center"
-                    align="center"
-                    css={{
-                      width: 25,
-                      height: 25,
-                    }}
-                  >
-                    {typeof button.icon === "string" && isIconUrl(button.icon) ? (
-                      <IconImage src={button.icon} alt="Missing img" />
-                    ) : (
-                      <LibIcon icon={button.icon} />
-                    )}
-                  </Flex>
-                )}
-                <Label disabled={button.disabled}>{button.title || buttonKey}</Label>
-              </Flex>
-              {button.description && (
-                <Description disabled={button.disabled}>{button.description}</Description>
-              )}
-              {button.progress !== undefined && (
-                <StyledProgress value={button.progress}>
-                  <StyledProgressIndicator
-                    style={{ transform: `translateX(-${100 - button.progress}%)` }}
-                  />
-                </StyledProgress>
-              )}
-            </Flex>
-            {(button.menu || button.arrow) && button.arrow !== false && (
-              <Flex
-                direction="column"
-                justify="center"
-                align="center"
-                css={{ width: 25, height: 25 }}
-              >
-                <LibIcon icon="chevron-right" />
-              </Flex>
-            )}
-          </Flex>
+        <ButtonRoot disabled={disabled} readOnly={button.readOnly} onClick={handleClick}>
+          <ButtonContent button={button} buttonKey={buttonKey} disabled={disabled} />
         </ButtonRoot>
       </HoverCardTrigger>
       <StyledHoverCardContent

@@ -2,6 +2,7 @@ import { useNuiEvent } from "@/hooks/useNuiEvent";
 import type { CirclularProgressProps } from "@/types/progress";
 import { useEffect, useState } from "react";
 import "./CircularProgress.css";
+import { fetchNui } from "@/utils/fetchNui";
 
 const size = 80;
 const strokeWidth = 4;
@@ -43,6 +44,7 @@ export const CircularProgress = () => {
     if (data.duration > 0) {
       const timer = setTimeout(() => {
         setVisible(false);
+        fetchNui("progressComplete");
       }, data.duration);
 
       return () => clearTimeout(timer);

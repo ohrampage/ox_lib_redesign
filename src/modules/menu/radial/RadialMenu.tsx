@@ -48,6 +48,12 @@ const StyledRadialMenuItem = styled(motion.li, {
       color: "var(--slate-12)",
     },
   },
+
+  '&[data-disabled="true"]': {
+    backgroundColor: "var(--slate-1)",
+    border: "1px solid var(--slate-2)",
+    cursor: "not-allowed",
+  },
 });
 
 const RadialMenuWrapper = styled(motion.div, {
@@ -123,15 +129,26 @@ export const RadialMenuNew = ({ menuItems, size = 200, option }: RadialMenuNewPr
   const innerEl = useRef<HTMLDivElement | null>(null);
   const lastAngle = useRef<number | null>(-1);
 
-  const totalPages = Math.ceil(menuItems.length / MAX_ITEMS);
-  const displayItems = menuItems.slice(
+  type PaddedRadialMenuItem = RadialMenuItem & {
+    disabled?: boolean;
+  };
+
+  // Add dummy items for 1 or 2 items to ensure at least 3
+  const paddedMenuItems: PaddedRadialMenuItem[] = [...menuItems];
+  if (menuItems.length > 0 && menuItems.length < 3) {
+    for (let i = menuItems.length; i < 3; i++) {
+      paddedMenuItems.push({ label: "", icon: "", disabled: true });
+    }
+  }
+
+  const totalPages = Math.ceil(paddedMenuItems.length / MAX_ITEMS);
+  const displayItems = paddedMenuItems.slice(
     state.currentPage * MAX_ITEMS,
     (state.currentPage + 1) * MAX_ITEMS
   );
 
   if (totalPages > 1 && displayItems.length < MAX_ITEMS) {
     displayItems.push({
-      //   id: state.currentPage < totalPages - 1 ? "next" : "back",
       label: state.currentPage < totalPages - 1 ? "Next" : "Back",
       icon: "chevron-right",
       menu: state.currentPage < totalPages - 1 ? "next" : "back",
@@ -143,10 +160,10 @@ export const RadialMenuNew = ({ menuItems, size = 200, option }: RadialMenuNewPr
       const itemCount = Math.min(displayItems.length, MAX_ITEMS);
       switch (itemCount) {
         case 3:
-          setProperties([-30, 48, 40, 60, 66.6]);
+          setProperties([-30, 37, 30, 60, 66.6]);
           break;
         case 4:
-          setProperties([0, 52, 52, 90, 74.9]);
+          setProperties([0, 47, 47, 90, 74.9]);
           break;
         case 5:
           setProperties([18, 55, 55, 108, 80]);
@@ -208,6 +225,7 @@ export const RadialMenuNew = ({ menuItems, size = 200, option }: RadialMenuNewPr
       if (state.selected === null) return;
 
       const item = displayItems[state.selected];
+      if (item.disabled) return; // Skip disabled (dummy) items
       if (item.menu === "next") {
         setState((prev) => ({
           ...prev,
@@ -223,8 +241,7 @@ export const RadialMenuNew = ({ menuItems, size = 200, option }: RadialMenuNewPr
         fetchNui("radialBack");
       } else {
         fetchNui("radialClick", state.selected);
-        // window.postMessage({ type: "radialClick", index: state.selected }, "*");
-        setState((prev) => ({ ...prev, selected: null })); // Reset selection after click
+        setState((prev) => ({ ...prev, selected: null }));
       }
     };
 
@@ -298,16 +315,16 @@ export const RadialMenuNew = ({ menuItems, size = 200, option }: RadialMenuNewPr
       <RadialMenu aria-describedby="radial-menu" role="menu" css={{ width: size, height: size }}>
         {displayItems.map((item, i) => (
           <StyledRadialMenuItem
-            key={item.label}
+            key={item.label || `dummy-${i}`}
             role="menuitem"
             aria-label={item.label}
             css={{
               "--rotate": getItemStyle(i, displayItems.length),
               transform: `rotate(var(--rotate)) skew(${properties[0]}deg)`,
-              width: size / 1.75,
-              height: size / 1.75,
-              maxWidth: size / 1.75,
-              maxHeight: size / 1.75,
+              width: size / 1.65,
+              height: size / 1.65,
+              maxWidth: size / 1.65,
+              maxHeight: size / 1.65,
               "& svg": {
                 position: "absolute",
                 top: `${properties[1]}%`,
@@ -329,7 +346,9 @@ export const RadialMenuNew = ({ menuItems, size = 200, option }: RadialMenuNewPr
               },
             }}
             data-selected={state.selected === i}
+            data-disabled={item.disabled || false}
             onClick={() => {
+              if (item.disabled) return; // Skip disabled (dummy) items
               if (item.menu === "next") {
                 setState((prev) => ({
                   ...prev,
@@ -348,12 +367,7 @@ export const RadialMenuNew = ({ menuItems, size = 200, option }: RadialMenuNewPr
               }
             }}
           >
-            <LibIcon icon={item.icon} />
-            {/* {typeof item.icon === "string" ? (
-              <i className={`fas fa-${item.icon}`}></i>
-            ) : (
-              <i className={`${item.icon[0]} fa-${item.icon[1]}`}></i>
-            )} */}
+            {item.icon && <LibIcon icon={item.icon} />}
           </StyledRadialMenuItem>
         ))}
       </RadialMenu>
@@ -368,7 +382,9 @@ export const RadialMenuNew = ({ menuItems, size = 200, option }: RadialMenuNewPr
           },
         }}
       >
-        {state.selected !== null && <Label>{displayItems[state.selected].label}</Label>}
+        {state.selected !== null && !displayItems[state.selected].disabled && (
+          <Label>{displayItems[state.selected].label}</Label>
+        )}
       </Inner>
     </RadialMenuWrapper>
   );
